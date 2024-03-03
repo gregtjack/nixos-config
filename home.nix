@@ -9,7 +9,6 @@
     helix
     wget
     curl
-    git
 
     ripgrep
     jq
@@ -34,6 +33,13 @@
     # games
     gamescope
   ];
+
+  programs.git = {
+    enable = true;
+
+    userEmail = "gregtj30@gmail.com";
+    userName = "gregtjack";
+  };
 
   programs.fish.enable = true;
   programs.direnv = {
