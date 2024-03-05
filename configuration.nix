@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
@@ -35,7 +35,6 @@
           publicKey = "mqoQwexGzvYJ63u35PJukMOleZXRLLkfQKODwm3NPB4=";
           allowedIPs = [ "0.0.0.0/0" "::/0" ];
           endpoint = "37.19.221.197:51820";
-  
           persistentKeepalive = 25;
         }
       ];
@@ -61,9 +60,9 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -76,7 +75,13 @@
   };
 
   # Nix features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -89,33 +94,23 @@
   environment.systemPackages = with pkgs; [
     # essentials
     vim
-    firefox
-    kitty
-    
-    # Apps
-    libsForQt5.dolphin
-    libsForQt5.gwenview
-
-    # utils
-    mako
-    wl-clipboard
-    tofi
-    cliphist
-    hyprpaper
-    # hypridle
-    # hyprlock
-    # hyprpicker
-    grim
+    wget
+    curl
+    git
   ];
 
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      # Use the development version of hyprland
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      xwayland.enable = true;
+    };
+
     waybar.enable = true;
     steam.enable = true;
     fish.enable = true;
-  };
-
-  security.pam.services.swaylock = {};
+  }; 
 
   # fonts
   fonts.packages = with pkgs; [
@@ -124,20 +119,18 @@
     (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
   ];
 
+  services.greetd = {
+    enable = true;
+    settings.defualt_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      user = "greeter";
+    };
+  };
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-  };
-  
-  services.xserver = {
-    enable = true;
-    displayManager = {
-      lightdm = {
-        enable = true;
-        greeters.gtk.enable = true;
-      };
-    };
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -162,6 +155,10 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
   };
 
   # Enable the OpenSSH daemon.

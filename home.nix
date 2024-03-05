@@ -7,9 +7,8 @@
     neovim 
     neofetch
     helix
-    wget
-    curl
 
+    # cli utils
     ripgrep
     jq
     dig
@@ -33,7 +32,7 @@
     vscodium    
     vlc
 
-    # games
+    # games 
     gamescope
   ];
 
