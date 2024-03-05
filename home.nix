@@ -20,6 +20,7 @@
     zoxide
     bat
     btop
+    just
 
     # Apps 
     firefox
@@ -29,6 +30,8 @@
     spotify
     stremio
     obsidian
+    vscodium    
+    vlc
 
     # games
     gamescope

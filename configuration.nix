@@ -72,6 +72,7 @@
     description = "Greg Jackson";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
+    shell = pkgs.fish;
   };
 
   # Nix features
@@ -79,11 +80,12 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # obsidian workaround
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+
   environment.systemPackages = with pkgs; [
     # essentials
     vim
@@ -110,6 +112,7 @@
     hyprland.enable = true;
     waybar.enable = true;
     steam.enable = true;
+    fish.enable = true;
   };
 
   security.pam.services.swaylock = {};
@@ -125,6 +128,16 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+  };
+  
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      lightdm = {
+        enable = true;
+        greeters.gtk.enable = true;
+      };
+    };
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -150,8 +163,6 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  services.greetd.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
