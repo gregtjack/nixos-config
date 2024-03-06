@@ -1,39 +1,39 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  inputs,
+  hostname,
+  username,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "sora"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = hostname; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
-  
+
+  # proton vpn
   networking.wg-quick.interfaces = {
     wg-pvpn-us = {
       autostart = false;
-      address = [ "10.2.0.2/32" ];
+      address = ["10.2.0.2/32"];
       listenPort = 51820;
       privateKeyFile = "/etc/keys/protonvpn.key";
       peers = [
         {
           publicKey = "mqoQwexGzvYJ63u35PJukMOleZXRLLkfQKODwm3NPB4=";
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          allowedIPs = ["0.0.0.0/0" "::/0"];
           endpoint = "37.19.221.197:51820";
           persistentKeepalive = 25;
         }
@@ -66,17 +66,16 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.greg = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Greg Jackson";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = ["networkmanager" "wheel" "audio" "video"];
     shell = pkgs.fish;
   };
 
   # Nix features
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
     auto-optimise-store = true;
 
     substituters = ["https://hyprland.cachix.org"];
@@ -97,7 +96,11 @@
     wget
     curl
     git
+    gnome.adwaita-icon-theme
   ];
+
+  services.xserver.enable = true;
+  services.xserver.displayManager.startx.enable = true;
 
   programs = {
     hyprland = {
@@ -110,13 +113,13 @@
     waybar.enable = true;
     steam.enable = true;
     fish.enable = true;
-  }; 
+  };
 
   # fonts
   fonts.packages = with pkgs; [
     noto-fonts
     helvetica-neue-lt-std
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
   ];
 
   services.greetd = {
@@ -125,6 +128,11 @@
       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
       user = "greeter";
     };
+  };
+
+  security = {
+    polkit.enable = true;
+    pam.services.ags = {};
   };
 
   hardware.opengl = {
@@ -146,7 +154,7 @@
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = false;
 
-    # Use the NVidia open source kernel module 
+    # Use the NVidia open source kernel module
     open = false;
 
     # Enable the Nvidia settings menu,
@@ -180,5 +188,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

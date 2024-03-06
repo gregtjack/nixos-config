@@ -1,44 +1,56 @@
-{ pkgs, ... }: {
+{
+  inputs,
+  username,
+  pkgs,
+  ...
+}: {
+  # imports = [ inputs.ags.homeManagerModules.default ];
 
-  home.username = "greg";
-  home.homeDirectory = "/home/greg";
+  home = {
+    inherit username;
+    homeDirectory = "/home/${username}";
 
-  home.packages = with pkgs; [  
-    neovim 
-    neofetch
-    helix
+    packages = with pkgs; [
+      neovim
+      neofetch
+      helix
 
-    # cli utils
-    ripgrep
-    jq
-    dig
-    tldr
-    tokei
-    eza
-    hyperfine
-    zoxide
-    bat
-    btop
-    just
+      tofi # runner
+      mako # notifications
+      swww # wallpapers
 
-    # Apps 
-    firefox
-    kitty
-    discord
-    prismlauncher
-    spotify
-    stremio
-    obsidian
-    vscodium    
-    vlc
+      # cli utils
+      ripgrep
+      jq
+      dig
+      tldr
+      tokei
+      eza
+      hyperfine
+      zoxide
+      bat
+      btop
+      just
+      alejandra
 
-    # games 
-    gamescope
-  ];
+      # apps
+      firefox
+      kitty
+      discord
+      prismlauncher
+      spotify
+      stremio
+      obsidian
+      vscodium
+      vlc
+
+      # currently does not work
+      # gamescope
+    ];
+  };
 
   programs.git = {
     enable = true;
-
     userEmail = "gregtj30@gmail.com";
     userName = "gregtjack";
   };
