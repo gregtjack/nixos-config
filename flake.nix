@@ -36,6 +36,7 @@
       specialArgs = {inherit inputs username hostname;};
       modules = [
         ./configuration.nix
+        ./greetd.nix
         home-manager.nixosModules.home-manager
         {
           home-manager = {

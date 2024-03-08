@@ -13,11 +13,6 @@
     packages = with pkgs; [
       neovim
       neofetch
-      helix
-
-      tofi # runner
-      mako # notifications
-      swww # wallpapers
 
       # cli utils
       ripgrep
@@ -53,6 +48,26 @@
     enable = true;
     userEmail = "gregtj30@gmail.com";
     userName = "gregtjack";
+  };
+
+  programs.helix = {
+    enable = true;
+    languages = {
+      # the language-server option currently requires helix from the master branch at https://github.com/helix-editor/helix/
+      language-server.typescript-language-server = with pkgs.nodePackages; {
+        command = "${typescript-language-server}/bin/typescript-language-server";
+        args = ["--stdio" "--tsserver-path=${typescript}/lib/node_modules/typescript/lib"];
+      };
+      language-server.rust-analyzer = with pkgs; {
+        command = "${rust-analyzer}/bin/rust-analyzer";
+      };
+      language = [
+        {
+          name = "rust";
+          auto-format = false;
+        }
+      ];
+    };
   };
 
   programs.fish.enable = true;

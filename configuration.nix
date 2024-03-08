@@ -97,11 +97,16 @@
     curl
     git
     gnome.adwaita-icon-theme
+
+    # clipboard
+    wl-clipboard
+    cliphist
+
+    tofi # runner
+    mako # notifications
+    swww # wallpapers
   ];
-
-  services.xserver.enable = true;
-  services.xserver.displayManager.startx.enable = true;
-
+  
   programs = {
     hyprland = {
       enable = true;
@@ -121,19 +126,13 @@
     helvetica-neue-lt-std
     (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
   ];
-
-  services.greetd = {
-    enable = true;
-    settings.defualt_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-      user = "greeter";
-    };
-  };
-
+  
   security = {
     polkit.enable = true;
     pam.services.ags = {};
   };
+
+  services.gnome.gnome-keyring.enable = true;
 
   hardware.opengl = {
     enable = true;
