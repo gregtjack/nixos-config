@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   inputs,
   hostname,
@@ -10,36 +7,15 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./nvidia.nix
+    ./networking.nix
+    ./greetd.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = hostname; # Define your hostname.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # proton vpn
-  networking.wg-quick.interfaces = {
-    wg-pvpn-us = {
-      autostart = false;
-      address = ["10.2.0.2/32"];
-      listenPort = 51820;
-      privateKeyFile = "/etc/keys/protonvpn.key";
-      peers = [
-        {
-          publicKey = "mqoQwexGzvYJ63u35PJukMOleZXRLLkfQKODwm3NPB4=";
-          allowedIPs = ["0.0.0.0/0" "::/0"];
-          endpoint = "37.19.221.197:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
-  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -133,40 +109,6 @@
   };
 
   services.gnome.gnome-keyring.enable = true;
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fai.
-    powerManagement.enable = false;
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module
-    open = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

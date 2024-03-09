@@ -11,8 +11,8 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    ags = {
-      url = "github:Aylur/ags";
+    watershot = {
+      url = "github:Kirottu/watershot";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -24,7 +24,7 @@
     ...
   } @ inputs: let
     username = "greg";
-    hostname = "nixos";
+    hostname = "alpha";
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -35,15 +35,14 @@
       inherit system;
       specialArgs = {inherit inputs username hostname;};
       modules = [
-        ./configuration.nix
-        ./greetd.nix
+        ./hosts/alpha
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = {inherit inputs username;};
-            users.${username} = import ./home.nix;
+            users.${username} = import ./home/home.nix;
           };
         }
       ];
