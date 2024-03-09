@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   hardware.opengl = {
     enable = true;
     driSupport = true;

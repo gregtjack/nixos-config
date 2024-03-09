@@ -28,7 +28,7 @@
       just
       alejandra
       (inputs.watershot.packages.${pkgs.system}.default)
-      
+
       # apps
       firefox
       kitty

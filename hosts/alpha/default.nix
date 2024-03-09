@@ -82,7 +82,7 @@
     mako # notifications
     swww # wallpapers
   ];
-  
+
   programs = {
     hyprland = {
       enable = true;
@@ -102,7 +102,7 @@
     helvetica-neue-lt-std
     (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
   ];
-  
+
   security = {
     polkit.enable = true;
     pam.services.ags = {};

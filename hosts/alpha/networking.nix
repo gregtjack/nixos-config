@@ -1,5 +1,8 @@
-{ pkgs, hostname, ... }:
 {
+  pkgs,
+  hostname,
+  ...
+}: {
   networking.hostName = hostname;
 
   # Enable networking
