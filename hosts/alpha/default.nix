@@ -81,6 +81,7 @@
     tofi # runner
     mako # notifications
     swww # wallpapers
+    hypridle # idle manager
   ];
 
   programs = {
@@ -99,6 +100,7 @@
   # fonts
   fonts.packages = with pkgs; [
     noto-fonts
+    inter
     helvetica-neue-lt-std
     (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
   ];
