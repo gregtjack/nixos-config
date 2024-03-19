@@ -4,40 +4,48 @@
   pkgs,
   ...
 }: {
-  # imports = [ inputs.ags.homeManagerModules.default ];
+  imports = [
+    ./neovim
+  ];
 
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
-      neovim
       neofetch
 
       # cli utils
       ripgrep
+      fd
       jq
       dig
       tldr
       tokei
       eza
+      fzf
       hyperfine
       zoxide
       bat
       btop
       just
       alejandra
+      lazygit
 
       # apps
       firefox
       kitty
+      alacritty
       discord
+      webcord
       prismlauncher
       spotify
       stremio
       obsidian
       vscodium
+      pavucontrol
       vlc
+      qimgv
 
       # currently does not work
       # gamescope

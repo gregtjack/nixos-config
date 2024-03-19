@@ -16,6 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -54,6 +55,7 @@
     experimental-features = ["nix-command" "flakes"];
     auto-optimise-store = true;
 
+    # Hyprland binary cache
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
@@ -72,16 +74,23 @@
     wget
     curl
     git
-    gnome.adwaita-icon-theme
+
+    gnome.adwaita-icon-theme # cursor
+    gnome.nautilus # files
+    glib
 
     # clipboard
     wl-clipboard
     cliphist
+    # screenshot
+    grim
+    slurp
 
     tofi # runner
     mako # notifications
     swww # wallpapers
     hypridle # idle manager
+    hyprlock # lock
   ];
 
   programs = {
@@ -98,12 +107,18 @@
   };
 
   # fonts
-  fonts.packages = with pkgs; [
-    noto-fonts
-    inter
-    helvetica-neue-lt-std
-    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
-  ];
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      inter
+      helvetica-neue-lt-std
+      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+    ];
+    
+    fontconfig.defaultFonts = {
+      sansSerif = [ "Inter" "Noto Sans" ];
+    };
+  };
 
   security = {
     polkit.enable = true;
