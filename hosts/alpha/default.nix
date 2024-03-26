@@ -16,7 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -77,6 +77,7 @@
 
     gnome.adwaita-icon-theme # cursor
     gnome.nautilus # files
+    nwg-look
     glib
 
     # clipboard
@@ -86,7 +87,7 @@
     grim
     slurp
 
-    tofi # runner
+    rofi-wayland # runner
     mako # notifications
     swww # wallpapers
     hypridle # idle manager
@@ -114,9 +115,9 @@
       helvetica-neue-lt-std
       (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];
-    
+
     fontconfig.defaultFonts = {
-      sansSerif = [ "Inter" "Noto Sans" ];
+      sansSerif = ["Inter" "Noto Sans"];
     };
   };
 

@@ -1,7 +1,5 @@
-# NixOS related commands
-
 default:
-  just --list
+  @just --list
 
 deploy:
   sudo nixos-rebuild switch --flake .
@@ -9,8 +7,11 @@ deploy:
 debug:
   sudo nixos-rebuild switch --flake . --show-trace --verbose
 
+history:
+  nix profile history --profile /nix/var/nix/profiles/system
+
+wipe-history:
+  sudo nix profile wipe-history --older-than 7d --profile /nix/var/nix/profiles/system
+
 update:
   nix flake update
-
-show:
-  nix flake show

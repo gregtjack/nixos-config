@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./neovim
   ];
 
@@ -13,9 +14,8 @@
     homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
+      # cli
       neofetch
-
-      # cli utils
       ripgrep
       fd
       jq
@@ -30,20 +30,20 @@
       btop
       just
       alejandra
-      lazygit
 
       # apps
-      firefox
+      firefox-devedition
+      chromium
       kitty
-      alacritty
+      wezterm
       discord
-      webcord
       prismlauncher
       spotify
       stremio
       obsidian
       vscodium
       pavucontrol
+      playerctl
       vlc
       qimgv
 
