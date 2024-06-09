@@ -32,10 +32,9 @@
       alejandra
 
       # apps
-      firefox-devedition
+      firefox
       chromium
       kitty
-      wezterm
       discord
       prismlauncher
       spotify
@@ -46,6 +45,7 @@
       playerctl
       vlc
       qimgv
+      reaper
 
       # currently does not work
       # gamescope

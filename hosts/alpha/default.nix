@@ -127,7 +127,7 @@
   };
   
   # Plasma 6 
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
 

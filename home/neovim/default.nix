@@ -2,19 +2,17 @@
   programs.nixvim = {
     enable = true;
 
-    colorschemes.gruvbox.enable = true;
+    colorschemes.catppuccin.enable = true;
 
-    options = {
+    opts = {
       number = true;
       relativenumber = true;
       shiftwidth = 2;
     };
-
+    
     globals.mapleader = " ";
 
     plugins = {
-      lualine.enable = true;
-
       telescope = {
         enable = true;
         keymaps = {
@@ -26,10 +24,9 @@
         };
         extensions.fzf-native.enable = true;
       };
-
-      oil.enable = true;
+     
       treesitter.enable = true;
-      luasnip.enable = true;
+
       # rust lsp and tools
       rustaceanvim.enable = true;
 
@@ -43,6 +40,24 @@
 	  gopls.enable = true;
 	  ccls.enable = true;
         };
+      };
+
+      mini = {
+	enable = true;
+	# Enable and configure the mini modules. The keys are the names of the modules 
+	# (without the mini. prefix). The value is an attrs of configuration options for 
+	# the module. Leave the attrs empty to use the module’s default configuration.
+	modules = { 
+	  files = {};
+	  bracketed = {};
+	  notify = {};
+	  diff = {};
+	  git = {};
+	  surround = {};
+	  statusline = {};
+	  tabline = {};
+	  comment = {};
+	};	
       };
 
       cmp = {
@@ -64,19 +79,33 @@
         settings.mapping = {
           "<CR>" = "cmp.mapping.confirm({ select = true })";
           "<Tab>" = ''
-               cmp.mapping(function(fallback)
-                 if cmp.visible() then
-            local entries = cmp.get_entries()
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+	    cmp.mapping(function(fallback)
+	      if cmp.visible() then
+		local entries = cmp.get_entries()
+		cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 
-            if #entries == 1 then
-              cmp.confirm()
-            end
-                 else
-            fallback()
-                 end
-               end, { "i", "s" })
+	      if #entries == 1 then
+		cmp.confirm()
+	      end
+	    else
+	      fallback()
+	      end
+            end, { "i", "s" })
           '';
+	  "<S-Tab>" = ''
+	    cmp.mapping(function(fallback)
+	      if cmp.visible() then
+		local entries = cmp.get_entries()
+		cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+
+		if #entries == 1 then
+		  cmp.confirm()
+		end 
+	      else
+		fallback()
+	      end 
+	    end, { "i", "s" })
+	  '';
         };
       };
     };
