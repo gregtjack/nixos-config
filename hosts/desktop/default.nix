@@ -45,9 +45,15 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    description = "Greg Jackson";
-    extraGroups = ["networkmanager" "wheel" "audio" "video"];
-    shell = pkgs.fish;
+    extraGroups = ["networkmanager" "wheel" "audio" "video" "docker"];
+  };
+
+  home-manager = {
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs username;};
+    users.${username} = import ./home.nix;
   };
 
   # Nix features
@@ -69,8 +75,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # essentials
-    vim
     wget
     curl
     git
@@ -83,6 +87,7 @@
     # clipboard
     wl-clipboard
     cliphist
+
     # screenshot
     grim
     slurp
@@ -104,10 +109,8 @@
 
     waybar.enable = true;
     steam.enable = true;
-    fish.enable = true;
   };
 
-  # fonts
   fonts = {
     packages = with pkgs; [
       noto-fonts
@@ -125,8 +128,7 @@
     polkit.enable = true;
     pam.services.ags = {};
   };
-  
-  # Plasma 6 
+
   services.desktopManager.plasma6.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
