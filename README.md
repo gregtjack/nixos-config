@@ -1,4 +1,4 @@
 
 # NixOS configuration
 
-My personal NixOS config with home-manager for home dir configuration
+My personal NixOS config with home-manager for declarative dotfiles

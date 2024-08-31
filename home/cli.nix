@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    neofetch
+    fastfetch
     ripgrep
     fd
     jq
@@ -12,6 +12,7 @@
     zoxide
     bat
     btop
+    htop
     just
     alejandra
   ];

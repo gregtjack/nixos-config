@@ -7,6 +7,7 @@
         layer = "top";
         position = "top";
         height = 30;
+        margin = "5px";
         modules-left = [
           "hyprland/workspaces"
           "hyprland/mode"
@@ -40,7 +41,7 @@
           format-bluetooth = "{icon}  {volume}% ";
           format-muted = "";
           format-icons = {
-              "default" = ["" ""];
+            "default" = ["" ""];
           };
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
         };

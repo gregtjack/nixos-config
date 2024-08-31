@@ -19,8 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = {
-      url = "github:Aylur/ags";
+    zen-browser = {
+      url = "github:gregtjack/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

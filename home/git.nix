@@ -1,7 +1,6 @@
 let
   name = "gregtjack";
-in
-{
+in {
   programs.git = {
     enable = true;
     userEmail = "gregtj30@gmail.com";

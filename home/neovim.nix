@@ -25,7 +25,9 @@
         extensions.fzf-native.enable = true;
       };
 
+      luasnip.enable = true;
       treesitter.enable = true;
+      lualine.enable = true;
 
       # rust lsp and tools
       rustaceanvim.enable = true;
@@ -54,7 +56,6 @@
           diff = {};
           git = {};
           surround = {};
-          statusline = {};
           tabline = {};
           comment = {};
         };

@@ -78,20 +78,15 @@
     wget
     curl
     git
-
-    gnome.adwaita-icon-theme # cursor
-    gnome.nautilus # files
+    vim
+    adwaita-icon-theme
+    nautilus
     nwg-look
     glib
-
-    # clipboard
     wl-clipboard
     cliphist
-
-    # screenshot
-    grim
+    grim 
     slurp
-
     rofi-wayland # runner
     mako # notifications
     swww # wallpapers
@@ -100,15 +95,11 @@
   ];
 
   programs = {
+    steam.enable = true;
     hyprland = {
       enable = true;
-      # Use the development version of hyprland
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      xwayland.enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
-
-    waybar.enable = true;
-    steam.enable = true;
   };
 
   fonts = {
@@ -130,11 +121,12 @@
   };
 
   services.desktopManager.plasma6.enable = true;
-
   services.gnome.gnome-keyring.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.flatpak.enable = true;
 
   # Sound
   security.rtkit.enable = true;
