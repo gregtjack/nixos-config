@@ -21,22 +21,27 @@
     inherit username;
     homeDirectory = "/home/${username}";
 
-    packages = with pkgs; [
-      # apps
-      ungoogled-chromium
-      firefox
-      prismlauncher
-      spotify
-      stremio
-      obsidian
-      vscodium
-      zed-editor
-      playerctl
-      mpv
-      qimgv
-      tidal-hifi
-      webcord-vencord
-    ] ++ [inputs.zen-browser.packages."${system}".default];
+    packages = with pkgs;
+      [
+        # apps
+        ungoogled-chromium
+        firefox
+        ladybird
+        prismlauncher
+        spotify
+        stremio
+        obsidian
+        vscodium
+        zed-editor
+        code-cursor
+        playerctl
+        mpv
+        qimgv
+        tidal-hifi
+        webcord-vencord
+        ghostty
+      ]
+      ++ [inputs.zen-browser.packages."${system}".default];
   };
 
   programs.direnv = {

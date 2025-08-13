@@ -79,13 +79,14 @@
     curl
     git
     vim
+    inetutils
     adwaita-icon-theme
     nautilus
     nwg-look
     glib
     wl-clipboard
     cliphist
-    grim 
+    grim
     slurp
     rofi-wayland # runner
     mako # notifications
@@ -102,12 +103,15 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+
   fonts = {
     packages = with pkgs; [
       noto-fonts
       inter
       helvetica-neue-lt-std
-      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
 
     fontconfig.defaultFonts = {

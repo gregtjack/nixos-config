@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    # utils
     fastfetch
     ripgrep
     fd
@@ -8,12 +9,12 @@
     tokei
     eza
     fzf
-    hyperfine
     zoxide
     bat
     btop
     htop
     just
+    hyperfine
     alejandra
   ];
 }

@@ -24,8 +24,8 @@ in {
 
     settings = {
       monitor = [
-        "HDMI-A-1,1920x1080,0x0,1"
-        "DP-2,1920x1080@165,1920x0,1"
+        "DP-2,2560x1440@360,0x0,1"
+	"HDMI-A-1,1920x1080@120,-1920x0,1"
         "Unknown-1,disable"
       ];
 
@@ -37,9 +37,10 @@ in {
       ];
 
       exec-once = [
-        "swww init"
+        "swww-daemon"
         "hypridle"
         "mako"
+        "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
       ];
@@ -72,7 +73,6 @@ in {
           new_optimizations = "on";
           popups = true;
         };
-        drop_shadow = "no";
       };
 
       animations = {

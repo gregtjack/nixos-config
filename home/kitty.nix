@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.kitty = {
     enable = true;
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
     shellIntegration.enableFishIntegration = true;
     settings = {
       font_family = "FiraCode Nerd Font";

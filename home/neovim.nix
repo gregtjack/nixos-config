@@ -35,12 +35,16 @@
       lsp = {
         enable = true;
         servers = {
-          tsserver.enable = true;
           html.enable = true;
+          ts-ls.enable = true;
           lua-ls.enable = true;
           ocamllsp.enable = true;
           gopls.enable = true;
-          ccls.enable = true;
+          pylyzer.enable = true;
+          ruff.enable = true;
+          astro.enable = true;
+          clangd.enable = true;
+          nixd.enable = true;
         };
       };
 

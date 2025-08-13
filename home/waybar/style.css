@@ -62,7 +62,6 @@
 /* Reset all styles */
 * {
     border: none;
-    border-radius: 5;
     min-height: 0;
     margin: 0;
     padding: 0;
@@ -70,6 +69,7 @@
 
 /* The whole bar */
 #waybar {
+    border-radius: 5;
     background: alpha(@base, 0.8);
     color: @text;
     font-family: 'JetBrainsMono NF', monospace, sans-serif;
