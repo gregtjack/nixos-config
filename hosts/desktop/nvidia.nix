@@ -14,7 +14,7 @@
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
-    # Use the NVidia open source kernel module
+    # Use the Nvidia open source kernel module
     open = false;
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.

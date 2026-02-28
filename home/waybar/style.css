@@ -19,7 +19,7 @@
 @define-color subtext1 #bac2de;
 @define-color subtext0 #a6adc8;
 @define-color overlay2 #9399b2;
-@define-color overlay1 #7f849c;
+@define-color overlay1 #3c3a52;
 @define-color overlay0 #6c7086;
 @define-color surface2 #585b70;
 @define-color surface1 #45475a;
@@ -69,7 +69,7 @@
 
 /* The whole bar */
 #waybar {
-    border-radius: 5;
+    border-radius: 0;
     background: alpha(@base, 0.8);
     color: @text;
     font-family: 'JetBrainsMono NF', monospace, sans-serif;
@@ -172,12 +172,11 @@
     font-weight: bold;
 }
 
-#workspaces {
-  border-radius: 0;
-}
+#workspaces {}
 
 #workspaces button {
     border-bottom: 2px solid transparent;
+    border-radius: 0px;
     /* To compensate for the bottom border and still have vertical centering */
     padding-top: 2px;
     padding-left: 10px;
@@ -186,7 +185,7 @@
 }
 
 #workspaces button:hover {
-    background-color: @overlay2;
+    background-color: @overlay0;
 }
 
 #workspaces button.active:hover {
@@ -196,10 +195,10 @@
 #workspaces button.active {
     border-color: @sapphire;
     color: @text;
-    background-color: @overlay0;
+    background-color: @overlay1;
 }
 
 #workspaces button.urgent {
     border-color: @red;
-    color: @overlay1;
+    color: @overlay2;
 }

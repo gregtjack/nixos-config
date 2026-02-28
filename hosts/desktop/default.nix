@@ -72,7 +72,10 @@
   # obsidian workaround
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+    "qtwebengine-5.15.19"
   ];
+  
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
   environment.systemPackages = with pkgs; [
     wget
@@ -88,7 +91,7 @@
     cliphist
     grim
     slurp
-    rofi-wayland # runner
+    rofi # runner
     mako # notifications
     swww # wallpapers
     hypridle # idle manager
@@ -101,6 +104,7 @@
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
+    niri.enable = true;
   };
 
   virtualisation.docker.enable = true;

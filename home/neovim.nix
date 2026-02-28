@@ -36,8 +36,8 @@
         enable = true;
         servers = {
           html.enable = true;
-          ts-ls.enable = true;
-          lua-ls.enable = true;
+          ts_ls.enable = true;
+          lua_ls.enable = true;
           ocamllsp.enable = true;
           gopls.enable = true;
           pylyzer.enable = true;

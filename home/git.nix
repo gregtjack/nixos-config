@@ -3,9 +3,11 @@ let
 in {
   programs.git = {
     enable = true;
-    userEmail = "gregtj30@gmail.com";
-    userName = name;
-    extraConfig = {
+    settings = {
+      user = {
+        inherit name;
+        email = "gregtj30@gmail.com";
+      };
       color.ui = true;
       core.editor = "nvim";
       github.user = name;

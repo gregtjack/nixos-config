@@ -7,7 +7,7 @@
         layer = "top";
         position = "top";
         height = 30;
-        margin = "5px";
+        margin = "0px";
         modules-left = [
           "hyprland/workspaces"
           "hyprland/mode"

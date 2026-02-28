@@ -12,11 +12,6 @@
   clipboard = pkgs.writeShellScript "clipboard" ''
     cliphist list | ${pkgs.tofi}/bin/tofi | cliphist decode | wl-copy
   '';
-
-  play = pkgs.writeShellScript "yt" ''
-    ${pkgs.libnotify}/bin/notify-send "Opening video" "$(wl-paste)"
-    ${pkgs.mpv}/bin/mpv "$(wl-paste)"
-  '';
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -25,7 +20,7 @@ in {
     settings = {
       monitor = [
         "DP-2,2560x1440@360,0x0,1"
-	"HDMI-A-1,1920x1080@120,-1920x0,1"
+        "HDMI-A-1,1920x1080@120,-1080x0,1,transform,1"
         "Unknown-1,disable"
       ];
 
@@ -93,8 +88,6 @@ in {
         preserve_split = "yes";
       };
 
-      gestures.workspace_swipe = "off";
-
       misc = {
         force_default_wallpaper = -1;
       };
@@ -108,14 +101,13 @@ in {
         ws = [1 2 3 4 5 6 7 8 9];
       in
         [
-          (exec "Q" "kitty")
+          (exec "Q" "ghostty")
           (exec "B" "firefox")
           (mainb "killactive" "C" "")
           (mainb "exit" "M" "")
           (mainb "fullscreen" "F" "0")
           (mainb "togglefloating" "L" "")
           (exec "R" "${runner}")
-          (exec "P" "${play}")
           (mainb "movefocus" "left" "l")
           (mainb "movefocus" "right" "r")
           (mainb "movefocus" "up" "u")

@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # utils
     fastfetch
     ripgrep
     fd

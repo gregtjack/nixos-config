@@ -26,10 +26,8 @@
         # apps
         ungoogled-chromium
         firefox
-        ladybird
         prismlauncher
         spotify
-        stremio
         obsidian
         vscodium
         zed-editor
@@ -37,18 +35,15 @@
         playerctl
         mpv
         qimgv
-        tidal-hifi
-        webcord-vencord
+        discord
         ghostty
-      ]
-      ++ [inputs.zen-browser.packages."${system}".default];
+	railway
+      ];
   };
 
   programs.direnv = {
     enable = true;
   };
-
-  programs.librewolf.enable = true;
 
   # The state version is required and should stay at the version you
   # originally installed.
